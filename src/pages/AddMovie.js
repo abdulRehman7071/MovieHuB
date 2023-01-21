@@ -10,7 +10,8 @@ const AddMovie = () => {
         {
             title: "",
             url: "",
-            // rating: "",
+            rating: 0,
+            rated: 0,
             year: "",
             desc: ''
         }
@@ -21,6 +22,8 @@ const AddMovie = () => {
         e.preventDefault()
         setLoading(true)
         addMovie()
+        // setMovies({})
+        document.querySelector('form').reset()
 
 
     }
@@ -46,7 +49,7 @@ const AddMovie = () => {
     }
 
     return (
-        <div className=' flex  flex-col h-full justify-center items-center text-black min-h-screen'>
+        <section className=' flex  flex-col h-full mt-3 md:mt-0 md:justify-center items-center text-black min-h-screen'>
             <h2 className=' text-3xl text-teal-400  font-bold '>
                 Add Movie
             </h2>
@@ -96,7 +99,7 @@ const AddMovie = () => {
                     </button>
                 </div>
             </form>
-        </div>
+        </section>
     )
 }
 
