@@ -1,16 +1,22 @@
 import { addDoc, doc, updateDoc, query, where, getDocs } from 'firebase/firestore'
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { TailSpin, CirclesWithBar } from 'react-loader-spinner'
 import ReactStars from 'react-stars'
 import swal from 'sweetalert'
 import { db, reviewsRef } from '../firebase/firebase'
+import { AppState } from '../App'
+import { useNavigate } from 'react-router-dom'
+
 
 const Review = ({ id, prevRating, userRated }) => {
+    const navigate = useNavigate()
+    const useAppState = useContext(AppState)
     const [rating, setRating] = useState(0);
     const [loading, setLoading] = useState(false)
     const [review, setReview] = useState("")
     const [loadReview, setLoadReview] = useState(false)
     const [data, setData] = useState([])
+    const [revAdded, setRevAdded] = useState(0)
 
 
     const handleReview = async (e) => {
@@ -18,29 +24,36 @@ const Review = ({ id, prevRating, userRated }) => {
         e.preventDefault()
         setLoading(true)
         try {
-            await addDoc(reviewsRef, {
-                movies: id,
-                rating: rating,
-                review: review,
-                reviewer: 'Abdul',
-                time: new Date().getTime()
+            if (useAppState.login) {
+                await addDoc(reviewsRef, {
+                    movies: id,
+                    rating: rating,
+                    review: review,
+                    reviewer: useAppState.user,
+                    time: new Date().getTime()
 
 
-            });
-            swal({
-                title: 'Review added',
-                icon: 'success',
-                buttons: false,
-                timer: 3000
-            })
-            setReview('')
-            setRating(0)
-            await setLoading(false)
-            const docRef = doc(db, 'Movies', id)
-            await updateDoc(docRef, {
-                rating: prevRating + rating,
-                rated: userRated + 1
-            })
+                });
+                swal({
+                    title: 'Review added',
+                    icon: 'success',
+                    buttons: false,
+                    timer: 3000
+                })
+                setReview('')
+                setRating(0)
+                setRevAdded(revAdded + 1)
+                await setLoading(false)
+                const docRef = doc(db, 'Movies', id)
+                await updateDoc(docRef, {
+                    rating: prevRating + rating,
+                    rated: userRated + 1
+                })
+            }
+            else {
+                navigate('/login')
+            }
+
         } catch (e) {
             swal({
                 title: e,
@@ -58,8 +71,7 @@ const Review = ({ id, prevRating, userRated }) => {
             setLoadReview(true)
 
             const qry = query(reviewsRef, where('movies', '==', id))
-            console.log("Start");
-            console.log(qry);
+            setData([])
             const querrySnapshot = await getDocs(qry)
             querrySnapshot.forEach(doc => {
                 setData((prev) => [...prev, doc.data()])
@@ -69,7 +81,7 @@ const Review = ({ id, prevRating, userRated }) => {
             setLoadReview(false)
         }
         getData()
-    }, [])
+    }, [revAdded])
     return (
         <section className=' mt-4 border-t-2 border-slate-100 w-full'>
             <form>
