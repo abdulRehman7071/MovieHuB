@@ -25,12 +25,12 @@ const Cards = () => {
             {loading ? <div className=' flex justify-center items-center w-full h-screen'><ThreeCircles height={40} color='white' /></div> :
                 movies.map((movie, id) => (
                     <Link to={`/view-movie/${movie.id}`} key={id}>
-                        <div className='w-36 mx-4 shadow-xl drop-shadow-xl cursor-pointer hover:scale-110 hover:-translate-y-1 transition-all ease-in-out rounded my-4 duration-500'>
+                        <div className='w-36 mx-2 shadow-xl drop-shadow-xl cursor-pointer hover:scale-110 hover:-translate-y-1 transition-all ease-in-out rounded my-4 duration-500'>
                             <div className=' relative p-1 '>
                                 <img src={movie.url} alt={movie.title} className=' h-60 md:w-72' />
 
                             </div>
-                            <div className=' rounded flex flex-col text-xs'>
+                            <div className=' rounded flex flex-col text-xs max-w-full w-36'>
                                 <h2 className=' my-1 font-bold'> Name:
                                     <span className=' text-slate-100 ml-1'>
                                         {movie.title}
