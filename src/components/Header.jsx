@@ -12,8 +12,8 @@ const Header = () => {
         <header className=' flex sticky top-0 z-10 bg-gray-900 items-center justify-between border-b-2 border-teal-400 w-full p-3'>
             <Link to='/'>
                 <div
-                    className="logo text-slate-100 cursor-pointer text-2xl font-bold ">
-                    Movie
+                    className="logo text-slate-100 cursor-pointer text-xl md:text-2xl font-bold ">
+                    Review
                     <span className=' text-teal-400'>Hub</span>
                 </div>
             </Link>
@@ -22,11 +22,11 @@ const Header = () => {
 
             </nav>
             {login ?
-                <div className=' flex'>
+                <div className=' flex text-xs md:text-md'>
 
                     <Link to="/upload-movie">
                         <div className=' flex items-center rounded border-2  border-slate-100 px-2 py-1 cursor-pointer hover:bg-slate-100 hover:text-gray-900 '>
-                            <RiVideoAddFill size={25} />
+                            <RiVideoAddFill size={15} />
 
                             <h2 className=' ml-1'>
 

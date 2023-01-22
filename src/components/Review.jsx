@@ -75,9 +75,7 @@ const Review = ({ id, prevRating, userRated }) => {
             const querrySnapshot = await getDocs(qry)
             querrySnapshot.forEach(doc => {
                 setData((prev) => [...prev, doc.data()])
-                console.log(doc.data())
             })
-            console.log("Finished")
             setLoadReview(false)
         }
         getData()
@@ -121,25 +119,25 @@ const Review = ({ id, prevRating, userRated }) => {
                             ariaLabel='circles-with-bar-loading'
                         />
                     </div>
-
                     : <div>
                         {data.map((item, i) => {
                             return (
                                 <div key={i} className=' mt-4 text-sm  bg-white text-black m-1 p-2 rounded'>
-                                    <div className=' flex justify-between text-xs'>
-                                        <p className=' bold'>
-                                            {item.reviewer}
-                                        </p>
-                                        <p>
-                                            {new Date(item.time).toLocaleString()}
-                                        </p>
-                                    </div>
-                                    <div className='mt-2' >
-                                        <ReactStars value={item.rating} edit={false} />
-                                        <p>
+                                    <div className='' >
+                                        <ReactStars value={item.rating} size={25} edit={false} />
+                                        <p className=' text-md my-3'>
                                             {item.review}
                                         </p>
                                     </div>
+                                    <div className=' flex text-xs text-black font-semibold'>
+                                        <p className=' bold'>
+                                            {item.reviewer}
+                                        </p>
+                                        <p className=' ml-2'>
+                                            {new Date(item.time).toLocaleString()}
+                                        </p>
+                                    </div>
+
                                 </div>
 
                             )

@@ -26,7 +26,6 @@ const Login = () => {
             qrySnapshot.forEach((doc) => {
                 const _data = doc.data();
                 const isUser = bcrypt.compareSync(loginData.password, _data.password);
-                console.log(isUser);
                 if (isUser) {
                     useAppstate.setLogin(true)
                     useAppstate.setUser(_data.name)

@@ -42,6 +42,7 @@ const UploadMovie = () => {
                     timer: 3000
                 })
                 await setLoading(false)
+                navigate('/')
             }
             else {
                 navigate('/login')
@@ -97,7 +98,7 @@ const UploadMovie = () => {
                     </textarea>
                     <button
                         onClick={handleSubmit}
-                        className=' w-full mx-auto p-2 px-10 md:px-4 font-semibold rounded bg-teal-400 mt-6 md:mt-3 text-black hover:bg-slate-100'>
+                        className=' w-full justify-center p-2 px-10 md:px-4 font-semibold rounded bg-teal-400 mt-6 md:mt-3 text-black hover:bg-slate-100'>
                         {loading ? <TailSpin height={25} color='black' /> : "Submit"}
                     </button>
                 </div>
