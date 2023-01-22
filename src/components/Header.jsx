@@ -12,7 +12,7 @@ const Header = () => {
         <header className=' flex sticky top-0 z-10 bg-gray-900 items-center justify-between border-b-2 border-teal-400 w-full p-3'>
             <Link to='/'>
                 <div
-                    className="logo text-slate-100 cursor-pointer text-2xl font-bold ">
+                    className="logo text-slate-100 cursor-pointer text-xl md:text-2xl font-bold ">
                     Review
                     <span className=' text-teal-400'>Hub</span>
                 </div>
@@ -38,7 +38,7 @@ const Header = () => {
 
                         <div
                             onClick={() => setLogin(false)}
-                            className='ml-4 flex items-center rounded border-2  bg-slate-100 text-gray-900 px-2 py-1 cursor-pointer  hover:text-slate-100 hover:bg-gray-900 '>
+                            className='ml-4 flex items-center rounded border-2  bg-slate-100 text-gray-900 px-2 py-1 cursor-pointer '>
                             <h2 className=' '>
                                 {user}
                             </h2>
